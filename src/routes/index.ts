@@ -11,5 +11,6 @@ routes.use('/admins', adminsRouter);
 routes.use('/roles', rolesRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/members', membersRouter);
+routes.use('/sessions', membersRouter);
 
 export default routes;

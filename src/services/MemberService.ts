@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, UpdateResult } from 'typeorm';
 import { isUuid } from 'uuidv4';
 import Member from '../models/Member';
 import AppError from '../errors/AppErrors';
@@ -13,38 +13,23 @@ export default class MemberService {
   private async checkIfExists(
     repository: Repository<Member>,
     uniqueKey: string,
-    message: string,
-    type = true,
-  ): Promise<void> {
-    try {
-      let checkIfExists;
+  ): Promise<boolean> {
+    let checkIfExists;
 
-      if (isUuid(uniqueKey)) {
-        checkIfExists = await repository.findOne({
-          where: { id: uniqueKey },
-        });
-      } else {
-        checkIfExists = await repository.findOne({
-          where: { role_name: uniqueKey },
-        });
-      }
-
-      if (Boolean(checkIfExists) === type) {
-        throw new Error(message);
-      }
-      return;
-    } catch (err) {
-      throw new AppError(err.message);
+    if (isUuid(uniqueKey)) {
+      checkIfExists = await repository.findOne({
+        where: { id: uniqueKey },
+      });
+    } else {
+      checkIfExists = await repository.findOne({
+        where: { full_name: uniqueKey },
+      });
     }
+    return !!checkIfExists;
   }
 
   public async create({ full_name, role_id }: MemberRequest): Promise<Member> {
     const memberRepository = getRepository(Member);
-    await this.checkIfExists(
-      memberRepository,
-      full_name,
-      'Member already exists!',
-    );
 
     const member = memberRepository.create({ full_name, role_id });
     await memberRepository.save(member);
@@ -52,16 +37,14 @@ export default class MemberService {
     return member;
   }
 
-  public async list(): Promise<Member[]> {
-    const memberRepository = getRepository(Member);
-    const members = await memberRepository.find();
-    return members;
-  }
-
   public async remove(id: string): Promise<string> {
     const memberRepository = getRepository(Member);
 
-    await this.checkIfExists(memberRepository, id, 'id not valid!', false);
+    const memberExists = await this.checkIfExists(memberRepository, id);
+
+    if (!memberExists) {
+      throw new AppError('Invalid member');
+    }
 
     await memberRepository.delete(id);
 
@@ -72,13 +55,20 @@ export default class MemberService {
     full_name,
     role_id,
     id,
-  }: MemberRequest & { id: string }): Promise<string> {
+  }: MemberRequest & { id: string }): Promise<UpdateResult> {
     const memberRepository = getRepository(Member);
 
-    await this.checkIfExists(memberRepository, id, 'Member don´t exist!');
+    const memberExists = await this.checkIfExists(memberRepository, id);
 
-    await memberRepository.update(id, { full_name, role_id });
+    if (!memberExists) {
+      throw new AppError('Invalid member');
+    }
 
-    return 'Member Updated';
+    const memberUpdate = await memberRepository.update(id, {
+      full_name,
+      role_id,
+    });
+
+    return memberUpdate;
   }
 }

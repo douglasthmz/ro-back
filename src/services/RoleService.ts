@@ -11,39 +11,30 @@ export default class RoleService {
   private async checkIfExists(
     repository: Repository<Role>,
     uniqueKey: string,
-    message: string,
-    type = true,
-  ): Promise<void> {
-    try {
-      let checkIfExists;
+  ): Promise<boolean> {
+    let checkIfExists;
 
-      if (isUuid(uniqueKey)) {
-        checkIfExists = await repository.findOne({
-          where: { id: uniqueKey },
-        });
-      } else {
-        checkIfExists = await repository.findOne({
-          where: { role_name: uniqueKey },
-        });
-      }
-
-      if (Boolean(checkIfExists) === type) {
-        throw new Error(message);
-      }
-      return;
-    } catch (err) {
-      throw new AppError(err.message);
+    if (isUuid(uniqueKey)) {
+      checkIfExists = await repository.findOne({
+        where: { id: uniqueKey },
+      });
+    } else {
+      checkIfExists = await repository.findOne({
+        where: { role_name: uniqueKey },
+      });
     }
+
+    return !!checkIfExists;
   }
 
   public async create({ role_name }: RoleRequest): Promise<Role> {
     const rolesRepository = getRepository(Role);
 
-    await this.checkIfExists(
-      rolesRepository,
-      role_name,
-      'This role already exists',
-    );
+    const roleExists = await this.checkIfExists(rolesRepository, role_name);
+
+    if (roleExists) {
+      throw new AppError('this role exist');
+    }
 
     const role = rolesRepository.create({ role_name });
     await rolesRepository.save(role);
@@ -51,16 +42,14 @@ export default class RoleService {
     return role;
   }
 
-  public async list(): Promise<Role[]> {
-    const rolesRepository = getRepository(Role);
-    const roles = await rolesRepository.find();
-    return roles;
-  }
-
   public async remove(id: string): Promise<string> {
     const rolesRepository = getRepository(Role);
 
-    await this.checkIfExists(rolesRepository, id, 'id not valid!', false);
+    const roleExists = await this.checkIfExists(rolesRepository, id);
+
+    if (!roleExists) {
+      throw new AppError('this role does not exists exist');
+    }
 
     await rolesRepository.delete(id);
 

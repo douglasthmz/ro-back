@@ -1,12 +1,14 @@
 import { Router } from 'express';
 
+import { getRepository } from 'typeorm';
 import MemberService from '../services/MemberService';
+import Member from '../models/Member';
 
 const memberRouter = Router();
 
 memberRouter.get('/', async (req, res) => {
-  const memberService = new MemberService();
-  const members = await memberService.list();
+  const memberRepository = getRepository(Member);
+  const members = await memberRepository.find();
   res.json(members);
 });
 
@@ -25,7 +27,7 @@ memberRouter.patch('/:id', async (req, res) => {
   const { full_name, role_id } = req.body;
   const memberService = new MemberService();
   const memberUpdated = await memberService.update({ id, full_name, role_id });
-  res.json({ message: memberUpdated });
+  res.json(memberUpdated);
 });
 
 memberRouter.delete('/:id', async (req, res) => {

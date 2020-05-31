@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
+import { getRepository } from 'typeorm';
 import RoleService from '../services/RoleService';
+import Role from '../models/Role';
 
 const rolesRouter = Router();
 
@@ -11,13 +13,12 @@ rolesRouter.post('/', async (req, res) => {
   const role = await roleService.create({
     role_name,
   });
-  console.log(role);
   return res.json(role);
 });
 
 rolesRouter.get('/', async (req, res) => {
-  const roleService = new RoleService();
-  const roles = await roleService.list();
+  const rolesRepository = getRepository(Role);
+  const roles = await rolesRepository.find();
   return res.json(roles);
 });
 
@@ -27,7 +28,7 @@ rolesRouter.delete('/:id', async (req, res) => {
 
   const roleDeleted = await roleService.remove(id);
 
-  return res.status(204).json({ message: roleDeleted });
+  return res.json({ message: roleDeleted });
 });
 
 export default rolesRouter;

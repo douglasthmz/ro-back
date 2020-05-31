@@ -15,29 +15,19 @@ export default class AdminService {
   private async checkIfExists(
     repository: Repository<Admin>,
     uniqueKey: string,
-    message: string,
-    type = true,
-  ): Promise<void> {
-    try {
-      let checkIfExists;
+  ): Promise<boolean> {
+    let checkIfExists;
 
-      if (isUuid(uniqueKey)) {
-        checkIfExists = await repository.findOne({
-          where: { id: uniqueKey },
-        });
-      } else {
-        checkIfExists = await repository.findOne({
-          where: { role_name: uniqueKey },
-        });
-      }
-
-      if (Boolean(checkIfExists) === type) {
-        throw new Error(message);
-      }
-      return;
-    } catch (err) {
-      throw new AppError(err.message);
+    if (isUuid(uniqueKey)) {
+      checkIfExists = await repository.findOne({
+        where: { id: uniqueKey },
+      });
+    } else {
+      checkIfExists = await repository.findOne({
+        where: { email: uniqueKey },
+      });
     }
+    return !!checkIfExists;
   }
 
   public async create({
@@ -47,11 +37,11 @@ export default class AdminService {
     role_id,
   }: AdminRequest): Promise<Admin> {
     const adminsRepository = getRepository(Admin);
-    await this.checkIfExists(
-      adminsRepository,
-      email,
-      'This email is already used',
-    );
+    const adminExists = await this.checkIfExists(adminsRepository, email);
+
+    if (adminExists) {
+      throw new AppError('This email is already in our database');
+    }
 
     const passwordHash = await hash(password, 8);
 
@@ -70,7 +60,11 @@ export default class AdminService {
   public async remove(id: string): Promise<string> {
     const adminsRepository = getRepository(Admin);
 
-    await this.checkIfExists(adminsRepository, id, 'Invalid ID', false);
+    const adminExists = await this.checkIfExists(adminsRepository, id);
+
+    if (!adminExists) {
+      throw new AppError('This email is already in our database');
+    }
 
     await adminsRepository.delete(id);
 
