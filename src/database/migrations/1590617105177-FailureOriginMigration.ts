@@ -2,7 +2,7 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class FailureOriginMigration1590617105177
   implements MigrationInterface {
-  public async up(queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     queryRunner.createTable(
       new Table({
         name: 'failures_origin',
@@ -40,7 +40,7 @@ export default class FailureOriginMigration1590617105177
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('failures_origin');
   }
 }

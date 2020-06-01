@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Users\feleite\Desktop\node-v12.16.1-win-x64\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/typeorm -D
+  C:\Users\feleite\Desktop\node-v12.16.1-win-x64\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D @types/typeorm
 
 PATH: 
   C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Users\feleite\Desktop\node-v12.16.1-win-x64;C:\curl\bin\curl.exe;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;w:\;t:\;;C:\Users\feleite\AppData\Local\Programs\Microsoft VS Code\bin
@@ -34,7 +34,8 @@ npm manifest:
     "main": "index.js",
     "scripts": {
       "build": "tsc",
-      "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts"
+      "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
+      "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
     },
     "repository": {
       "type": "git",
@@ -50,6 +51,7 @@ npm manifest:
     "devDependencies": {
       "@types/bcryptjs": "^2.4.2",
       "@types/cors": "^2.8.6",
+      "@types/dotenv": "^8.2.0",
       "@types/express": "^4.17.6",
       "@types/jsonwebtoken": "^8.5.0",
       "@types/node": "^14.0.5",
@@ -68,13 +70,16 @@ npm manifest:
     "dependencies": {
       "bcryptjs": "^2.4.3",
       "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
       "jsonwebtoken": "^8.5.1",
       "pg": "^8.2.1",
+      "pg-connection-string": "^2.2.3",
       "reflect-metadata": "^0.1.13",
       "typeorm": "^0.2.25",
-      "uuid": "^8.1.0"
+      "uuid": "^8.1.0",
+      "uuidv4": "^6.1.0"
     }
   }
 
@@ -138,6 +143,13 @@ Lockfile:
     integrity sha512-invOmosX0DqbpA+cE2yoHGUlF/blyf7nB0OGYBBiH27crcVm5NmFaZkLP4Ta1hGaesckCi5lVLlydNJCxkTOSg==
     dependencies:
       "@types/express" "*"
+  
+  "@types/dotenv@^8.2.0":
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
+    integrity sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==
+    dependencies:
+      dotenv "*"
   
   "@types/eslint-visitor-keys@^1.0.0":
     version "1.0.0"
@@ -717,6 +729,11 @@ Lockfile:
     integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
     dependencies:
       esutils "^2.0.2"
+  
+  dotenv@*, dotenv@^8.2.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+    integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   
   dotenv@^6.2.0:
     version "6.2.0"
@@ -2720,10 +2737,17 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
     integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
   
-  uuid@^8.1.0:
+  uuid@8.1.0, uuid@^8.1.0:
     version "8.1.0"
     resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.1.0.tgz#6f1536eb43249f473abc6bd58ff983da1ca30d8d"
     integrity sha512-CI18flHDznR0lq54xBycOVmphdCYnQLKn8abKn7PXUiKUGdEd+/l9LWNJmugXel4hXq7S+RMNl34ecyC9TntWg==
+  
+  uuidv4@^6.1.0:
+    version "6.1.0"
+    resolved "https://registry.yarnpkg.com/uuidv4/-/uuidv4-6.1.0.tgz#a8d50c71e46da4dd0edc887a2b766a75e48e5740"
+    integrity sha512-BLAg+H3301PcC0Vp2Nq/q0qujpr2iI6NN2Kt28dtTFmHHZCXurq8+lDl9+XJzvavYBz2HJoUncjKx0+XVcTJIg==
+    dependencies:
+      uuid "8.1.0"
   
   v8-compile-cache@^2.0.3:
     version "2.1.0"
