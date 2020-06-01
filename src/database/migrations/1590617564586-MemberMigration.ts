@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export default class MemberMigration1590617564586
   implements MigrationInterface {
@@ -16,7 +21,7 @@ export default class MemberMigration1590617564586
           },
           {
             name: 'role_id',
-            type: 'varchar',
+            type: 'uuid',
             isNullable: false,
           },
           {
@@ -37,9 +42,22 @@ export default class MemberMigration1590617564586
         ],
       }),
     );
+
+    await queryRunner.createForeignKey(
+      'members',
+      new TableForeignKey({
+        name: 'RoleId',
+        columnNames: ['role_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'roles',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
+    await queryRunner.dropForeignKey('members', 'RoleId');
     await queryRunner.dropTable('members');
   }
 }

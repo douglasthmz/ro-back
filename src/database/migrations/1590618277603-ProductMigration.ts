@@ -34,7 +34,7 @@ export default class ProductMigration1590618277603
           {
             name: 'avatar_link',
             type: 'varchar',
-            isNullable: false,
+            isNullable: true,
             isUnique: true,
           },
           {

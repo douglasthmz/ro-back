@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export default class ExibitionMigration1590618870586
   implements MigrationInterface {
@@ -16,12 +21,12 @@ export default class ExibitionMigration1590618870586
           },
           {
             name: 'product_id',
-            type: 'varchar',
+            type: 'uuid',
             isNullable: false,
           },
           {
             name: 'admin_id',
-            type: 'varchar',
+            type: 'uuid',
             isNullable: false,
           },
           {
@@ -58,9 +63,30 @@ export default class ExibitionMigration1590618870586
         ],
       }),
     );
+
+    await queryRunner.createForeignKeys('exibitions', [
+      new TableForeignKey({
+        name: 'ProductId',
+        columnNames: ['product_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'products',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+      new TableForeignKey({
+        name: 'AdminId',
+        columnNames: ['admin_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'admins',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    ]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
+    await queryRunner.dropForeignKey('exibitions', 'AdminId');
+    await queryRunner.dropForeignKey('exibitions', 'ProductId');
     await queryRunner.dropTable('exibitions');
   }
 }
