@@ -83,6 +83,16 @@ export default class MembersList1591143304870 implements MigrationInterface {
             type: 'uuid',
             isNullable: true,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
       }),
     );

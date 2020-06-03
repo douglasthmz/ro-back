@@ -4,12 +4,10 @@ import {
   UpdateDateColumn,
   Entity,
   OneToMany,
-  ManyToMany,
-  JoinTable,
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import Member from './Member';
+import Members_list from './MembersList';
 import Failure from './Failure';
 import Exibition from './Exibition';
 
@@ -32,11 +30,10 @@ class Report {
   failures: Failure[];
 
   @Column()
-  members_id: string;
+  members_list_id: string;
 
-  @ManyToMany(() => Member)
-  @JoinTable()
-  members: Member[];
+  @OneToMany(() => Members_list, members_list => members_list.report)
+  members_list: string;
 
   @Column()
   comments: string;

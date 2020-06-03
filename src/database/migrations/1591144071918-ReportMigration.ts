@@ -31,7 +31,7 @@ export default class ReportMigration1591144071918
             isArray: true,
           },
           {
-            name: 'members_id',
+            name: 'members_list_id',
             type: 'uuid',
             isNullable: false,
             isArray: true,
