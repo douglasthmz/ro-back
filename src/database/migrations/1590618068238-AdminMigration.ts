@@ -7,17 +7,6 @@ import {
 
 export default class AdminMigration1590618068238 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createForeignKey(
-      'admins',
-      new TableForeignKey({
-        name: 'RoleId',
-        columnNames: ['role_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'roles',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
     await queryRunner.createTable(
       new Table({
         name: 'admins',
@@ -61,6 +50,17 @@ export default class AdminMigration1590618068238 implements MigrationInterface {
             default: 'now()',
           },
         ],
+      }),
+    );
+    await queryRunner.createForeignKey(
+      'admins',
+      new TableForeignKey({
+        name: 'RoleId',
+        columnNames: ['role_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'roles',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       }),
     );
   }

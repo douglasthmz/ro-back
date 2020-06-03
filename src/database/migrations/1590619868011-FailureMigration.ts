@@ -73,7 +73,7 @@ export default class FailureMigration1590619868011
       }),
     );
     await queryRunner.createForeignKey(
-      'FailureOriginId',
+      'failures',
       new TableForeignKey({
         name: 'FailureOriginId',
         columnNames: ['failure_origin_id'],

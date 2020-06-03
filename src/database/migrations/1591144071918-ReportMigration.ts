@@ -28,13 +28,11 @@ export default class ReportMigration1591144071918
             name: 'failures_id',
             type: 'uuid',
             isNullable: false,
-            isArray: true,
           },
           {
             name: 'members_list_id',
             type: 'uuid',
             isNullable: false,
-            isArray: true,
           },
           {
             name: 'comments',
@@ -73,7 +71,7 @@ export default class ReportMigration1591144071918
       }),
       new TableForeignKey({
         name: 'MembersListId',
-        columnNames: ['membersList_id'],
+        columnNames: ['members_list_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'members_list',
         onDelete: 'SET NULL',
