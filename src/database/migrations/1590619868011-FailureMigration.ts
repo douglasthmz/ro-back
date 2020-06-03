@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export default class FailureMigration1590619868011
   implements MigrationInterface {
@@ -67,9 +72,21 @@ export default class FailureMigration1590619868011
         ],
       }),
     );
+    await queryRunner.createForeignKey(
+      'FailureOriginId',
+      new TableForeignKey({
+        name: 'FailureOriginId',
+        columnNames: ['failure_origin_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'failures_origin',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('failures');
+    await queryRunner.dropForeignKey('failures', 'FailureOriginId');
   }
 }

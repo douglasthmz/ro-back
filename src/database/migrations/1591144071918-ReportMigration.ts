@@ -1,6 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export default class ReportMigration1590619868012
+export default class ReportMigration1591144071918
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -49,9 +54,38 @@ export default class ReportMigration1590619868012
         ],
       }),
     );
+    await queryRunner.createForeignKeys('reports', [
+      new TableForeignKey({
+        name: 'FailuresId',
+        columnNames: ['failures_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'failures',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+      new TableForeignKey({
+        name: 'ExibitionId',
+        columnNames: ['exibition_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'exibitions',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+      new TableForeignKey({
+        name: 'MembersListId',
+        columnNames: ['membersList_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'members_list',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    ]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('reports');
+    await queryRunner.dropForeignKey('reports', 'MembersId');
+    await queryRunner.dropForeignKey('reports', 'ExibitionId');
+    await queryRunner.dropForeignKey('reports', 'FailuresId');
   }
 }
