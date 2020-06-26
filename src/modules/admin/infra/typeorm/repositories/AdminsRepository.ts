@@ -17,7 +17,10 @@ class AdminsRepository implements IAdminsRepository {
   }
 
   public async findByEmail(email: string): Promise<Admin | undefined> {
-    const admin = this.ormRepository.findOne({ where: { email } });
+    const admin = this.ormRepository.findOne({
+      where: { email },
+      relations: ['role'],
+    });
 
     return admin;
   }

@@ -34,6 +34,10 @@ class CreateAdminService {
       throw new AppError('Email already used');
     }
 
+    if (!email.includes('g.globo')) {
+      throw new AppError('Only corporate email are allowed');
+    }
+
     const passwordHash = await this.hashProvider.generateHash(password);
 
     const user = await this.adminsRepository.create({
