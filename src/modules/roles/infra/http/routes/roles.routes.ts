@@ -6,7 +6,7 @@ const rolesRouter = Router();
 const rolesController = new RolesController();
 
 rolesRouter.get('/', rolesController.show);
-rolesRouter.use(ensureAuthenticated);
 rolesRouter.post('/', rolesController.create);
+rolesRouter.use(ensureAuthenticated);
 
 export default rolesRouter;
