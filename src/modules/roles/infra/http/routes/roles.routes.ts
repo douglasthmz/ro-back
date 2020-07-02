@@ -7,6 +7,8 @@ const rolesController = new RolesController();
 
 rolesRouter.get('/', rolesController.show);
 rolesRouter.post('/', rolesController.create);
+rolesRouter.delete('/:id', rolesController.remove);
+
 rolesRouter.use(ensureAuthenticated);
 
 export default rolesRouter;

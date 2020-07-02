@@ -6,4 +6,5 @@ export default interface IRolesRepository {
   findById(id: string): Promise<Role | undefined>;
   create(data: ICreateRoleDTO): Promise<Role>;
   save(role: Role): Promise<Role>;
+  remove(id: string): Promise<void>;
 }

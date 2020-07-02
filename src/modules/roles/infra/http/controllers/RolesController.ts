@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateRoleService from '@modules/roles/services/CreateRoleService';
 import ShowRolesService from '@modules/roles/services/ShowRolesService';
+import RemoveRoleService from '@modules/roles/services/RemoveRoleService';
 
 export default class RolesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -22,5 +23,19 @@ export default class RolesController {
     const roles = await getRoles.execute();
 
     return response.json(roles);
+  }
+
+  public async remove(request: Request, response: Response): Promise<Response> {
+    try {
+      const { id } = request.params;
+
+      const removeRole = container.resolve(RemoveRoleService);
+
+      await removeRole.execute(id);
+
+      return response.status(204).json();
+    } catch (err) {
+      return response.status(400).json({ error: err.message });
+    }
   }
 }

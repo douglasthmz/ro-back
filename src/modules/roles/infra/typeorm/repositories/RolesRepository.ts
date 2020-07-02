@@ -31,6 +31,10 @@ class RolesRepository implements IRolesRepository {
   public async show(): Promise<Role[]> {
     return this.ormRepository.find();
   }
+
+  public async remove(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 }
 
 export default RolesRepository;
