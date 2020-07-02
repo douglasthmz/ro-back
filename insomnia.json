@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2020-06-30T22:19:12.042Z",
+  "__export_date": "2020-07-02T22:25:28.075Z",
   "__export_source": "insomnia.desktop.app:v2020.2.2",
   "resources": [
     {
@@ -175,6 +175,33 @@
       "settingSendCookies": true,
       "settingStoreCookies": true,
       "url": "{{ base_url  }}/roles",
+      "_type": "request"
+    },
+    {
+      "_id": "req_bb5668bb25a7432882dfd5f34d71bb25",
+      "authentication": {
+        "disabled": false,
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1593725914235,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590038863604.25,
+      "method": "DELETE",
+      "modified": 1593725954571,
+      "name": "delete",
+      "parameters": [],
+      "parentId": "fld_118955e899c44295936851d2c0b28db6",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/roles/4b1836f1-20cd-4e7e-969c-5cca9d321bc2",
       "_type": "request"
     },
     {
