@@ -8,6 +8,8 @@ import IRolesRepository from '@modules/roles/repositories/IRolesRepository';
 import RolesRepository from '@modules/roles/infra/typeorm/repositories/RolesRepository';
 import FailureOriginRepository from '@modules/failureOrigin/infra/typeorm/repositories/FailureOriginRepository';
 import IFailureOriginRepository from '@modules/failureOrigin/repositories/IFailureOriginRepository';
+import IProductsRepository from '@modules/product/repositories/IProductsRepository';
+import ProductsRepository from '@modules/product/infra/typeorm/repositories/ProductsRepository';
 
 container.registerSingleton<IAdminsRepository>(
   'AdminsRepository',
@@ -22,4 +24,9 @@ container.registerSingleton<IRolesRepository>(
 container.registerSingleton<IFailureOriginRepository>(
   'FailureOriginRepository',
   FailureOriginRepository,
+);
+
+container.registerSingleton<IProductsRepository>(
+  'ProductsRepository',
+  ProductsRepository,
 );
