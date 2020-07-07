@@ -10,6 +10,8 @@ import FailureOriginRepository from '@modules/failureOrigin/infra/typeorm/reposi
 import IFailureOriginRepository from '@modules/failureOrigin/repositories/IFailureOriginRepository';
 import IProductsRepository from '@modules/product/repositories/IProductsRepository';
 import ProductsRepository from '@modules/product/infra/typeorm/repositories/ProductsRepository';
+import IMembersRepository from '@modules/member/repositories/IMembersRepository';
+import MembersRepository from '@modules/member/infra/typeorm/repositories/MemberRepository';
 
 container.registerSingleton<IAdminsRepository>(
   'AdminsRepository',
@@ -30,3 +32,8 @@ container.registerSingleton<IProductsRepository>(
   'ProductsRepository',
   ProductsRepository,
 );
+
+container.registerSingleton<IMembersRepository>(
+  'MembersRepository',
+  MembersRepository
+)
