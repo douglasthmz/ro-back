@@ -25,8 +25,8 @@ export default class CreateMemberService {
       throw new AppError("Member name cannot be lower then 2 characters")
     }
     
-    if(data.full_name.startsWith(" ") || data.full_name == ""){
-      throw new AppError("Member name cannot be blank or start with spaces")
+    if(data.full_name.startsWith(" ")){
+      throw new AppError("Member name cannot start with spaces")
     }
 
 
