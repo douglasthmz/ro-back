@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2020-07-06T23:11:25.159Z",
+  "__export_date": "2020-07-07T23:17:54.651Z",
   "__export_source": "insomnia.desktop.app:v2020.2.2",
   "resources": [
     {
@@ -406,6 +406,108 @@
       "settingSendCookies": true,
       "settingStoreCookies": true,
       "url": "{{ base_url  }}/products/e950a0fd-433c-4da8-98a8-f66cf0fb116b",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1cbdc30de6b74cbb97fe5177954d80e1",
+      "authentication": {
+        "disabled": false,
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"role_id\": \"95dc7b4d-cd8f-4c30-98eb-1b6e4b1bcc02\",\n  \"full_name\": \"Meu pai\"\n}"
+      },
+      "created": 1594163439450,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_0bffe0bc16b3459e96e041649f37eec1",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1590615767115,
+      "method": "POST",
+      "modified": 1594163556176,
+      "name": "create",
+      "parameters": [],
+      "parentId": "fld_ec285f3f0a4644b59d4da80aa12d9b11",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/members",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_ec285f3f0a4644b59d4da80aa12d9b11",
+      "created": 1594163439447,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1588402952773,
+      "modified": 1594163448667,
+      "name": "Members",
+      "parentId": "wrk_1fb55f482f7d4fcb9ed4f48970c52f8e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_c327e18007794dcf9158480c4816a176",
+      "authentication": {
+        "disabled": false,
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1594163439463,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590231164774.5,
+      "method": "GET",
+      "modified": 1594163460614,
+      "name": "show",
+      "parameters": [],
+      "parentId": "fld_ec285f3f0a4644b59d4da80aa12d9b11",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/members",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7c4f1ab467514151a5dde6e9b0d60fc5",
+      "authentication": {
+        "disabled": false,
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1594163439464,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590038863604.25,
+      "method": "DELETE",
+      "modified": 1594163578708,
+      "name": "delete",
+      "parameters": [],
+      "parentId": "fld_ec285f3f0a4644b59d4da80aa12d9b11",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/members/da93d851-4f99-4ed0-bc91-96fa7b624cb7",
       "_type": "request"
     },
     {
