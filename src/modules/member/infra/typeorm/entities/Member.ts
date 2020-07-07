@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  Unique,
 } from 'typeorm';
 import Role from '../../../../roles/infra/typeorm/entities/Role';
 
@@ -16,12 +15,11 @@ class Member {
   id: string;
 
   @Column()
-  role_id:string
+  role_id: string;
 
-  @ManyToOne(() => Role, {eager:true})
-  @JoinColumn({name: 'role_id'})
-  role: Role
-
+  @ManyToOne(() => Role, { eager: true })
+  @JoinColumn({ name: 'role_id' })
+  role: Role;
 
   @Column()
   full_name: string;

@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
-import IMembersRepository from '@modules/member/repositories/IMembersRepository'
-import Member from '../entities/Member';
+import IMembersRepository from '@modules/member/repositories/IMembersRepository';
 import ICreateMemberDTO from '@modules/member/DTOs/ICreateMembersDTO';
+import Member from '../entities/Member';
 
 class MembersRepository implements IMembersRepository {
   private ormRepository: Repository<Member>;
@@ -17,7 +17,7 @@ class MembersRepository implements IMembersRepository {
   }
 
   public async show(): Promise<Member[]> {
-    return this.ormRepository.find()
+    return this.ormRepository.find();
   }
 
   public async create(memberData: ICreateMemberDTO): Promise<Member> {
@@ -28,7 +28,7 @@ class MembersRepository implements IMembersRepository {
     return member;
   }
 
-  public async remove (id: string): Promise<void>{
+  public async remove(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
 
@@ -36,13 +36,14 @@ class MembersRepository implements IMembersRepository {
     return this.ormRepository.save(member);
   }
 
-  public async findByName(full_name: string): Promise<Member | undefined>{
-    const member = await this.ormRepository.findOne({where:{full_name}})
-    return member
+  public async findByName(full_name: string): Promise<Member | undefined> {
+    const member = await this.ormRepository.findOne({ where: { full_name } });
+    return member;
   }
-  public async findByRole(role_id: string): Promise<Member | undefined>{
-    const member = await this.ormRepository.findOne({where:{role_id}})
-    return member
+
+  public async findByRole(role_id: string): Promise<Member | undefined> {
+    const member = await this.ormRepository.findOne({ where: { role_id } });
+    return member;
   }
 }
 

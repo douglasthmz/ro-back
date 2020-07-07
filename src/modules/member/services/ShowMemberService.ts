@@ -6,13 +6,11 @@ import Member from '../infra/typeorm/entities/Member';
 export default class CreateMemberService {
   constructor(
     @inject('MembersRepository')
-    private membersRepository: IMembersRepository
-  ){}
+    private membersRepository: IMembersRepository,
+  ) {}
 
-
-public async execute (): Promise< Member[]>{
-
-  const members = await this.membersRepository.show()
-  return members
+  public async execute(): Promise<Member[]> {
+    const members = await this.membersRepository.show();
+    return members;
   }
 }
