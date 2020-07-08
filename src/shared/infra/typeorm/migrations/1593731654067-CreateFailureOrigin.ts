@@ -13,7 +13,7 @@ export default class CreateFailureOrigin1593731654067
       `ALTER TABLE "admins" DROP CONSTRAINT "UQ_051db7d37d478a69a7432df1479"`,
     );
     await queryRunner.query(
-      `ALTER TABLE "admins" ADD CONSTRAINT "FK_5733c73cd81c566a90cc4802f96" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
+      `ALTER TABLE "admins" ADD CONSTRAINT "FK_5733c73cd81c566a90cc4802f96" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE SET NULL ON UPDATE SET NULL`,
     );
   }
 

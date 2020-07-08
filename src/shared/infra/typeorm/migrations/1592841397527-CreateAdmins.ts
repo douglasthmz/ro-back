@@ -29,6 +29,7 @@ export default class CreateAdmins1592841397527 implements MigrationInterface {
           {
             name: 'role_id',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -47,8 +48,8 @@ export default class CreateAdmins1592841397527 implements MigrationInterface {
             referencedTableName: 'roles',
             referencedColumnNames: ['id'],
             columnNames: ['role_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
+            onDelete: 'SET NULL',
+            onUpdate: 'SET NULL',
           },
         ],
       }),
