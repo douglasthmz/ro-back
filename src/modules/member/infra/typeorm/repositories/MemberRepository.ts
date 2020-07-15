@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import IMembersRepository from '@modules/member/repositories/IMembersRepository';
 import ICreateMemberDTO from '@modules/member/DTOs/ICreateMembersDTO';
+import AppError from '@shared/errors/AppErrors';
 import Member from '../entities/Member';
 
 class MembersRepository implements IMembersRepository {
@@ -25,7 +26,13 @@ class MembersRepository implements IMembersRepository {
 
     await this.ormRepository.save(member);
 
-    return member;
+    const savedMember = await this.ormRepository.findOne(member.id);
+
+    if (!savedMember) {
+      throw new AppError('Could not create the member');
+    }
+
+    return savedMember;
   }
 
   public async remove(id: string): Promise<void> {
