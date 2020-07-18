@@ -1,11 +1,8 @@
-// import { Router } from 'express';
-// import MembersListController from '../controllers/MembersListController';
+import { Router } from 'express';
+import MembersListController from '../controllers/MembersListController';
 
-// const membersRouter = Router();
-// const membersController = new MembersListController();
+const membersListRouter = Router();
+const membersListController = new MembersListController();
 
-// membersRouter.post('/', membersController.createMember);
-// membersRouter.delete('/:id', membersController.removeMember);
-// membersRouter.get('/', membersController.showMember);
-
-// export default membersRouter;
+membersListRouter.post('/', membersListController.createList);
+export default membersListRouter;

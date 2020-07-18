@@ -6,6 +6,7 @@ import sessionsRouter from '@modules/admin/infra/http/routes/sessions.routes';
 import failureOriginRouter from '@modules/failureOrigin/infra/http/routes/failureOrigin.routes';
 import productsRouter from '@modules/product/infra/http/routes/products.routes';
 import membersRouter from '@modules/member/infra/http/routes/members.routes';
+import membersListRouter from '@modules/member/infra/http/routes/membersList.routes';
 
 const routes = Router();
 
@@ -14,6 +15,7 @@ routes.use('/roles', rolesRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/failures', failureOriginRouter);
 routes.use('/products', productsRouter);
-routes.use('/members', membersRouter)
+routes.use('/members', membersRouter);
+routes.use('/membersList', membersListRouter);
 
 export default routes;
