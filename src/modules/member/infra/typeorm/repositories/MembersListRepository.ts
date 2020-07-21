@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import IMembersListRepository from '@modules/member/repositories/IMembersListRepository';
 import ICreateMembersListDTO from '@modules/member/DTOs/ICreateMembersListDTO';
-import AppError from '@shared/errors/AppErrors';
+// import AppError from '@shared/errors/AppErrors';
 import MembersList from '../entities/MembersList';
 
 class MembersListRepository implements IMembersListRepository {
@@ -11,15 +11,15 @@ class MembersListRepository implements IMembersListRepository {
     this.ormRepository = getRepository('members_list');
   }
 
-  // public async findById(id: string): Promise<MembersList | undefined> {
-  //   const member = this.ormRepository.findOne(id);
+  public async findById(id: string): Promise<MembersList | undefined> {
+    const member = this.ormRepository.findOne(id);
 
-  //   return member;
-  // }
+    return member;
+  }
 
-  // public async show(): Promise<MembersList[]> {
-  //   return this.ormRepository.find();
-  // }
+  public async show(): Promise<MembersList[]> {
+    return this.ormRepository.find();
+  }
 
   public async create(
     membersData: ICreateMembersListDTO,
@@ -41,9 +41,9 @@ class MembersListRepository implements IMembersListRepository {
     return membersList;
   }
 
-  // public async remove(id: string): Promise<void> {
-  //   await this.ormRepository.delete(id);
-  // }
+  public async remove(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 
   public async save(membersList: MembersList): Promise<MembersList> {
     return this.ormRepository.save(membersList);

@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateMembersListService from '@modules/member/services/CreateMembersListService';
-import { stringify } from 'querystring';
 
 export default class MembersController {
   public async createList(

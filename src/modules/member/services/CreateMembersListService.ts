@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import AppError from '@shared/errors/AppErrors';
+// import AppError from '@shared/errors/AppErrors';
 import IMembersListRepository from '../repositories/IMembersListRepository';
 import ICreateMembersListDTO from '../DTOs/ICreateMembersListDTO';
 import MembersList from '../infra/typeorm/entities/MembersList';
