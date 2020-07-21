@@ -4,8 +4,6 @@ import IMembersListRepository from '../repositories/IMembersListRepository';
 import ICreateMembersListDTO from '../DTOs/ICreateMembersListDTO';
 import MembersList from '../infra/typeorm/entities/MembersList';
 
-// Protocolo 038204217230089
-
 @injectable()
 export default class CreateMembersListService {
   constructor(
