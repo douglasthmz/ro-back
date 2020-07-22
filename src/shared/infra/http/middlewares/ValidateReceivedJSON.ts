@@ -13,7 +13,7 @@ const ValidateReceivedJSON = (MembersListSchema: JSONSchema7) => (
   const isValid = validate(request.body);
 
   if (!isValid) {
-    throw new AppError('Incorrect data', 404);
+    throw new AppError('Incorrect JSON data', 404);
   }
   return next();
 };

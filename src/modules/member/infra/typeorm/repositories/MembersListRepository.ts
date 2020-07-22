@@ -1,7 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import IMembersListRepository from '@modules/member/repositories/IMembersListRepository';
 import ICreateMembersListDTO from '@modules/member/DTOs/ICreateMembersListDTO';
-// import AppError from '@shared/errors/AppErrors';
 import MembersList from '../entities/MembersList';
 
 class MembersListRepository implements IMembersListRepository {
@@ -31,12 +30,6 @@ class MembersListRepository implements IMembersListRepository {
     });
 
     await this.ormRepository.save(membersList);
-
-    // const savedMember = await this.ormRepository.findOne(membersList.);
-
-    // if (!savedMember) {
-    //   throw new AppError('Could not create the member');
-    // }
 
     return membersList;
   }

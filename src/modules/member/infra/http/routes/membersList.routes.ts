@@ -11,4 +11,6 @@ membersListRouter.post(
   ValidateReceivedJSON(MembersListSchema),
   membersListController.createList,
 );
+membersListRouter.delete('/:id', membersListController.removeList);
+membersListRouter.get('/', membersListController.showMember);
 export default membersListRouter;
