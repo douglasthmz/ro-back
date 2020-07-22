@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, In } from 'typeorm';
 import IMembersRepository from '@modules/member/repositories/IMembersRepository';
 import ICreateMemberDTO from '@modules/member/DTOs/ICreateMembersDTO';
 import AppError from '@shared/errors/AppErrors';
@@ -15,6 +15,18 @@ class MembersRepository implements IMembersRepository {
     const member = this.ormRepository.findOne(id);
 
     return member;
+  }
+
+  public async findMembers(
+    membersList: string[],
+  ): Promise<Member[] | undefined> {
+    const members = this.ormRepository.find({
+      where: {
+        id: In(membersList),
+      },
+    });
+
+    return members;
   }
 
   public async show(): Promise<Member[]> {

@@ -1,70 +1,53 @@
 export default interface ICreateMembersListDTO {
   dtv_1: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   dtv_2?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   coordenador_tj: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
-  coordenador_externa_1: {
-    role_id: string;
-    full_name: string;
+  coordenador_externa_1?: {
+    member_id: string;
   };
   coordenador_externa_2?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   assistente_produção_1?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   assistente_produção_2?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   sonoplasta_1: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   sonoplasta_2?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   tecSis_1: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   tecSis_2?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   tecSis_3?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   liderTecnologia: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   produtorTecnologia: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   editorChefe?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   editorImagem_1: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
   editorImagem_2?: {
-    role_id: string;
-    full_name: string;
+    member_id: string;
   };
 }

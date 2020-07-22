@@ -1,11 +1,9 @@
 import { injectable, inject } from 'tsyringe';
-// import AppError from '@shared/errors/AppErrors';
-import { isUuid } from 'uuidv4';
+import AppError from '@shared/errors/AppErrors';
 import IMembersListRepository from '../repositories/IMembersListRepository';
 import ICreateMembersListDTO from '../DTOs/ICreateMembersListDTO';
 import MembersList from '../infra/typeorm/entities/MembersList';
 import IMembersRepository from '../repositories/IMembersRepository';
-import Member from '../infra/typeorm/entities/Member';
 
 @injectable()
 export default class CreateMembersListService {
@@ -19,19 +17,27 @@ export default class CreateMembersListService {
   public async execute(
     members_list_json: ICreateMembersListDTO,
   ): Promise<MembersList> {
-    for (const member in members_list_json) {
-      if (members_list_json.hasOwnProperty(member)) {
-        const element: Member = members_list_json[member];
-        if (isUuid(element.role_id)) {
-          const CheckIfMemberExists = await this.memberRepository.findById(
-            element.role_id,
-          );
-          console.log(!!CheckIfMemberExists);
-        }
-      }
+    const keys = Object.values(members_list_json);
+    const memberListId = keys.map(key => key.member_id);
+
+    const findDuplicates = memberListId.filter(
+      (item, index) => memberListId.indexOf(item) !== index,
+    );
+
+    if (findDuplicates.length > 0) {
+      throw new AppError('Exists duplicate members in list', 400);
     }
 
-    const membersList = this.membersListRepository.create(members_list_json);
-    return membersList;
+    const members = await this.memberRepository.findMembers(memberListId);
+
+    if (memberListId.length !== members?.length) {
+      throw new AppError('Exists invalid members in list', 400);
+    }
+
+    const membersList = await this.membersListRepository.create(
+      members_list_json,
+    );
+    const ParsedMembersList = JSON.parse(membersList.members_list_json);
+    return ParsedMembersList;
   }
 }
