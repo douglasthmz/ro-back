@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import Exibition from '../../../../exibition/infra/typeorm/entities/Exibition';
 
 @Entity('products')
 class Product {
@@ -28,6 +30,9 @@ class Product {
 
   @Column()
   control: string;
+
+  @OneToMany(type => Exibition, product => Product)
+  exibitions: Promise<Exibition[]>;
 
   @Column('int', { array: true })
   exibition_days: number[];

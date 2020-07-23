@@ -6,8 +6,10 @@ import {
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
+import Exibition from '../../../../exibition/infra/typeorm/entities/Exibition';
 import Role from '../../../../roles/infra/typeorm/entities/Role';
 
 @Entity('admins')
@@ -24,8 +26,11 @@ class Admin {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   role_id: string;
+
+  @OneToMany(type => Exibition, product => Admin)
+  exibitions: Promise<Exibition[]>;
 
   @ManyToOne(() => Role)
   @JoinColumn({ name: 'role_id' })

@@ -1,0 +1,26 @@
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import UpdateReportService from '@modules/report/services/UpdateReportService';
+import CreateReportService from '@modules/report/services/CreateReportService';
+
+export default class ReportsController {
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const updateReport = container.resolve(UpdateReportService);
+
+    const report = await updateReport.execute({ id });
+
+    return response.json(report);
+  }
+
+  public async test(request: Request, response: Response): Promise<Response> {
+    const { exibition_id } = request.body;
+
+    const createReport = container.resolve(CreateReportService);
+
+    const report = await createReport.execute(exibition_id);
+
+    return response.json(report);
+  }
+}
