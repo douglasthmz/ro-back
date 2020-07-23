@@ -17,7 +17,7 @@ class Member {
   @Column()
   role_id: string;
 
-  @ManyToOne(() => Role, { eager: true })
+  @ManyToOne(() => Role, { eager: true, nullable: true })
   @JoinColumn({ name: 'role_id' })
   role: Role;
 

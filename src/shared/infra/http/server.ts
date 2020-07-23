@@ -10,6 +10,7 @@ import '@shared/infra/typeorm';
 import '@shared/container';
 
 import AppError from '@shared/errors/AppErrors';
+import './jobs';
 import routes from './routes';
 
 const app = express();

@@ -12,6 +12,10 @@ import IProductsRepository from '@modules/product/repositories/IProductsReposito
 import ProductsRepository from '@modules/product/infra/typeorm/repositories/ProductsRepository';
 import IMembersRepository from '@modules/member/repositories/IMembersRepository';
 import MembersRepository from '@modules/member/infra/typeorm/repositories/MemberRepository';
+import IExibitionsRepository from '@modules/exibition/repositories/IExibitionsRepository';
+import ExibitionsRepository from '@modules/exibition/infra/typeorm/repositories/ExibitionsRepository';
+import IReportsRepository from '@modules/report/repositories/IReportsRepository';
+import ReportsRepository from '@modules/report/infra/typeorm/repositories/ReportsRepository';
 
 container.registerSingleton<IAdminsRepository>(
   'AdminsRepository',
@@ -35,5 +39,15 @@ container.registerSingleton<IProductsRepository>(
 
 container.registerSingleton<IMembersRepository>(
   'MembersRepository',
-  MembersRepository
-)
+  MembersRepository,
+);
+
+container.registerSingleton<IExibitionsRepository>(
+  'ExibitionsRepository',
+  ExibitionsRepository,
+);
+
+container.registerSingleton<IReportsRepository>(
+  'ReportsRepository',
+  ReportsRepository,
+);
