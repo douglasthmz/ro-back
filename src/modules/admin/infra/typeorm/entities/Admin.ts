@@ -29,8 +29,8 @@ class Admin {
   @Column({ nullable: true })
   role_id: string;
 
-  @OneToMany(type => Exibition, product => Admin)
-  exibitions: Promise<Exibition[]>;
+  // @OneToMany(type => Exibition, product => Admin)
+  // exibitions: Promise<Exibition[]>;
 
   @ManyToOne(() => Role)
   @JoinColumn({ name: 'role_id' })
