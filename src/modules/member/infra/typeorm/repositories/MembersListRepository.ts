@@ -16,10 +16,6 @@ class MembersListRepository implements IMembersListRepository {
     return member;
   }
 
-  public async show(): Promise<MembersList[]> {
-    return this.ormRepository.find();
-  }
-
   public async create(
     membersData: ICreateMembersListDTO,
   ): Promise<MembersList> {

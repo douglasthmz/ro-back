@@ -44,7 +44,7 @@ export default interface ICreateMembersListDTO {
   editorChefe?: {
     member_id: string;
   };
-  editorImagem_1: {
+  editorImagem_1?: {
     member_id: string;
   };
   editorImagem_2?: {

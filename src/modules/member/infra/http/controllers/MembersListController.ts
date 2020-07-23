@@ -41,9 +41,10 @@ export default class MembersController {
     request: Request,
     response: Response,
   ): Promise<Response> {
+    const { id } = request.params;
     const getMembersList = container.resolve(ShowMembersListService);
 
-    const membersList = await getMembersList.execute();
+    const membersList = await getMembersList.execute(id);
 
     return response.json(membersList);
   }

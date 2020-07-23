@@ -7,7 +7,6 @@ const MembersListSchema: JSONSchema7 = {
     'coordenador_tj',
     'sonoplasta_1',
     'tecSis_1',
-    'editorImagem_1',
     'liderTecnologia',
     'produtorTecnologia',
   ],

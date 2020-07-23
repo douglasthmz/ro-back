@@ -12,5 +12,5 @@ membersListRouter.post(
   membersListController.createList,
 );
 membersListRouter.delete('/:id', membersListController.removeList);
-membersListRouter.get('/', membersListController.showMember);
+membersListRouter.get('/:id', membersListController.showMember);
 export default membersListRouter;

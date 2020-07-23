@@ -9,12 +9,8 @@ export default class CreateMemberService {
     private membersListRepository: IMembersListRepository,
   ) {}
 
-  public async execute(): Promise<MembersList[]> {
-    const membersList = await this.membersListRepository.show();
-    const ParsedMembersList = membersList.map(member => {
-      const parsedMember = JSON.parse(member.members_list_json);
-      return parsedMember;
-    });
-    return ParsedMembersList;
+  public async execute(id: string): Promise<MembersList | undefined> {
+    const membersList = await this.membersListRepository.findById(id);
+    return membersList;
   }
 }
