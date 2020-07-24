@@ -31,8 +31,8 @@ class Product {
   @Column()
   control: string;
 
-  @OneToMany(type => Exibition, product => Product, { nullable: true })
-  exibitions: Promise<Exibition[]>;
+  // @OneToMany(type => Exibition, product => Product, { nullable: true })
+  // exibitions: Promise<Exibition[]>;
 
   @Column('int', { array: true })
   exibition_days: number[];
