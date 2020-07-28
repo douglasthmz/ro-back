@@ -15,6 +15,15 @@ class ReportsRepository implements IReportsRepository {
     return report;
   }
 
+  public async find(exibition_id: string): Promise<Report | undefined> {
+    const reports = await this.ormRepository.findOne({
+      where: {
+        exibition_id,
+      },
+    });
+    return reports;
+  }
+
   public async create(exibition_id: string): Promise<Report> {
     const report = this.ormRepository.create({ exibition_id });
 

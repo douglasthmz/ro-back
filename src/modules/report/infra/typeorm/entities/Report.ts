@@ -17,7 +17,9 @@ class Report {
   @Column()
   exibition_id: string;
 
-  @OneToOne(type => Exibition, exibition => Exibition, { eager: true })
+  @OneToOne(type => Exibition, exibition => Exibition, {
+    eager: true,
+  })
   @JoinColumn({ name: 'exibition_id' })
   exibition: Exibition;
 

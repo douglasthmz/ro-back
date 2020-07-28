@@ -9,6 +9,8 @@ reportsRouter.patch('/:id', reportsController.update);
 
 reportsRouter.post('/test', reportsController.test);
 
+reportsRouter.get('/:id', reportsController.index);
+
 reportsRouter.use(ensureAuthenticated);
 
 export default reportsRouter;

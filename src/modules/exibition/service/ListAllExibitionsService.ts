@@ -11,7 +11,6 @@ class ListAllExibitionsService {
 
   public async execute(product_id: string): Promise<Exibition[]> {
     const exibitions = await this.exibitionsRepository.findAll(product_id);
-
     return exibitions;
   }
 }
