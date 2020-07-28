@@ -80,8 +80,8 @@ const ProductsSeed = [
     alias: 'ESTI',
     control: 'Controle 2',
     exibition_days: [1, 2, 3, 4, 5],
-    initial_time: '21:00',
-    end_time: '23:15',
+    initial_time: '13:00',
+    end_time: '16:00',
   },
   {
     name: 'Edição das 10h',
