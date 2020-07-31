@@ -37,7 +37,6 @@ export default class ProductsController {
 
   public async show(request: Request, response: Response): Promise<Response> {
     const getProducts = container.resolve(ShowProductsService);
-
     const products = await getProducts.execute();
 
     return response.json(products);
